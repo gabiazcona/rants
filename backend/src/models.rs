@@ -1,4 +1,5 @@
 use diesel::prelude::*;
+use serde::Serialize;
 use crate::schema::rants;
 
 #[derive(Queryable)]
@@ -9,7 +10,7 @@ pub struct Post {
     pub published: bool,
 }
 
-#[derive(Queryable)]
+#[derive(Queryable, Serialize)]
 pub struct Rant {
     pub id: i32,
     pub title: String,

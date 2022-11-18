@@ -2,33 +2,33 @@ import React from "react";
 
 class App extends React.Component {
     state = {
-        data: [],
+        rants: [],
     }
 
     componentDidMount() {
         const url =       
-        //'https://en.wikipedia.org/w/api.php?action=opensearch&search=Seona+Dancing&format=json&origin=*';
         'http://localhost:8080/';
 
         fetch(url)
             .then((result) => result.json())
             
             .then((result) => {
-                console.log("recibimos result " + result.toString());
                 this.setState({
-                    data: result,
+                    rants: result,
                 })
             })
     }
 
     render() {
-        const { data } = this.state;
-        console.log(data)
-        const result = data.map((entry, index) => {
-            return <li key={index}>{entry}</li>
+        const { rants } = this.state;
+        console.log(rants)
+        const result = rants.map((rant, index) => {
+            return (<div key={index}>
+                <h2>{rant.title}</h2><p>from {rant.username}</p>
+                <h2>{rant.body}</h2><br/>
+            </div>)
           })
-        return <ul>{result}</ul>
-        //return <div>{this.state.data}</div>
+        return <div>{result}</div>
     }
 }
 
